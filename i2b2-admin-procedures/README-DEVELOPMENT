@@ -1,0 +1,28 @@
+#===============================================================================#
+#            Command line tools for administering an i2b2 project               #
+#===============================================================================#
+
+DEVELOPMENT CONSIDERATIONS: Inspect the POM.
+===========================================
+There is a production profile and a development profile.
+The build is production by default.
+Look at the enironment.type property setting within the pom, 
+which is used to produce two artifacts (development and production versions).
+
+The development version can drop databases!!!
+
+To install or deploy, please use the mvn-*.sh scripts:
+
+(a) mvn-install-dev.sh
+(b) mvn-install-prod.sh
+(c) mvn-deploy-dev.sh
+(d) mvn-deploy-prod.sh
+
+(a) and (b) install to your local maven repository
+(c) and (d) deploy to the remote Brisskit maven repository.
+
+NB: deployment to a snapshot repo or a release repo is governed by the version number.
+If it has SNAPSHOT within the version number, it will deploy only to the snapshot repo.
+
+You need authorisation for (c) and (d); ie: an OS account on the machine
+hosting the Brisskit maven repo plus (for convenience) a public/private key setup. 

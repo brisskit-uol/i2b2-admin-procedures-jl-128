@@ -1,0 +1,33 @@
+#===============================================================================#
+#            Command line tools for administering an i2b2 project               #
+#===============================================================================#
+
+PREREQUISITES.
+==============
+If you have i2b2 installed, then the prerequisites are almost certainly present.
+Other run-time dependencies are held within the lib directory.
+
+QUICK START.
+============
+1. Unzip this package into a convenient place on a server hosting an i2b2 domain.
+
+2. Set the I2B2_ADMIN_PROCS_HOME environment variable and export it.
+   This should be accomplished by editing the set.sh file within the i2b2 install directory;
+   issue the following command at the command prompt:
+   . ./set.sh
+   There is no need to do this as root or sudo. However, if you subsequently execute
+   a script as sudo, remember to inherit the environment settings:
+   sudo -E ./somescript.sh  
+   
+3. Review configuration settings within the config directory.
+   Basically three files:
+   config.properties
+   defaults.sh
+   log4j.properties 
+   
+NOTES.
+=======
+The remote-holding-area is used in calls within remote VM's,
+viz: caTissue and Onyx (maybe more in the future?).
+However, the fixed caTissue ontology (caTissue-Refined-Metadata8.xml) is also held 
+here for convenience. Be sure you don't accidentally delete it!!!
