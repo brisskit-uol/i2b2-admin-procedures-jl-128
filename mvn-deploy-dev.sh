@@ -16,7 +16,7 @@
 # to SVN once they have been set up.
 #
 #
-# Author: Jeff Lusted (jl99@leicester.ac.uk)
+# Author: Jeff Lusted (jeff.lusted@gmail.com)
 #-----------------------------------------------------------------------------------------------
 
 #===========================================================================
@@ -36,10 +36,10 @@ mvn clean install -Denvironment.type=development
 # Setup the lib directory suitable for testing ...
 #===========================================================================
 cd ./target
-unzip ./i2b2-admin-procedures*.zip >/dev/null 2>/dev/null
-rm ./i2b2-admin-procedures*.zip
-cp ./i2b2-admin-procedures*/lib/* ../procedures/lib
-rm -Rf ./i2b2-admin-procedures*
+unzip ./i2b2*admin-procedures*.zip >/dev/null 2>/dev/null
+rm ./i2b2*admin-procedures*.zip
+cp ./i2b2*admin-procedures*/lib/* ../procedures/lib
+rm -Rf ./i2b2*admin-procedures*
 cd ..
 
 #===========================================================================
