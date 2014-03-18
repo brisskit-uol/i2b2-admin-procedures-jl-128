@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.brisskit.app.i2b2</groupId>
-	<artifactId>i2b2-admin-procedures</artifactId>
+	<artifactId>i2b2-1.7-admin-procedures</artifactId>
 	<packaging>pom</packaging>
 	<name>i2b2 Standard Procedures. For BRISSkit</name>
-	<version>1.0-RC1-${environment.type}</version>
+	<version>1.0-${environment.type}-SNAPSHOT</version>
 
 	<description>This project brings together a set of standard i2b2 operating procedures for installing a BRISSKIT project  within an existing basic i2b2 install, and then for processing Onyx  and CaTissue data into it.</description>
 
@@ -71,6 +71,11 @@
 			<groupId>oracle.jdbc</groupId>
 			<artifactId>ojdbc</artifactId>
 			<version>14</version>
+		</dependency>
+		<dependency>
+			<groupId>postgresql.jdbc</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.2-1002.jdbc4</version>
 		</dependency>
 		<dependency>
 			<groupId>ms.jdbc</groupId>
