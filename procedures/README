@@ -4,8 +4,11 @@
 
 PREREQUISITES.
 ==============
-If you have i2b2 installed, then the prerequisites are almost certainly present.
+If you have i2b2 installed, then most prerequisites are present.
 Other run-time dependencies are held within the lib directory.
+
+However, some database artifacts also require to be set up beforehand.
+See below.
 
 QUICK START.
 ============
@@ -31,3 +34,23 @@ The remote-holding-area is used in calls within remote VM's,
 viz: caTissue and Onyx (maybe more in the future?).
 However, the fixed caTissue ontology (caTissue-Refined-Metadata8.xml) is also held 
 here for convenience. Be sure you don't accidentally delete it!!!
+
+DATABASE ARTIFACTS.
+====================
+Read this in conjunction with the config.properties file.
+Some artifacts will already have been set up by the install procedures.
+
+For Postgresql:
+---------------
+The overall database should already be present (eg: 'i2b2'),
+together with schemas for the hive and pm data.
+
+What is new FOR EACH PROJECT is an individual/unique schema within this database
+for metadata, crc data, work data and identity management data (4 new schemas).
+
+Each of these new schemas should also have a separate user with a username/password combination;
+For simplicity, the suggestion is the username and schemaname be the same in each case.
+
+
+
+

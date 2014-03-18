@@ -51,8 +51,8 @@ export BATCH_SIZE=50
 # Name of file that holds the central metadata details:
 export MAIN_REFINED_METADATA_FILE_NAME=refined-metadata.xml
 
-# Name of the DB; can be either 'oracle' or 'sqlserver'
-export DB_TYPE=sqlserver
+# Name of the DB; can be either 'oracle' or 'sqlserver' or 'postgresql'
+export DB_TYPE=postgresql
 
 # Name of directory to hold any zipped SQL test data (PDO based)
 export ZIPPED_SQL_DIRECTORY=z-zipped-sql
@@ -71,10 +71,11 @@ export MAIN_REFINED_METADATA_CATISSUE_FILE_NAME=caTissue-Refined-Metadata8.xml
 # These names MUST be unique within a JBoss deployment.
 # They MUST end with the string '-ds.xml'
 # Suggestions:
-# If your project is named 'briccs1' then the following would work:
-# briccs1-crc-ds.xml
-# briccs1-ont-ds.xml
-# briccs1-work-ds.xml
+# If your project is named 'brisskit1' then the following would work:
+# brisskit1-crc-ds.xml
+# brisskit1-ont-ds.xml
+# brisskit1-work-ds.xml
+# brisskit1-im-ds.xml
 #
 # The recommendation (not strict) is that these should be the same 
 # as the project.name setting within the config.properties file
@@ -82,6 +83,7 @@ export MAIN_REFINED_METADATA_CATISSUE_FILE_NAME=caTissue-Refined-Metadata8.xml
 export CRC_DS=REPLACEME-crc-ds.xml
 export ONT_DS=REPLACEME-ont-ds.xml
 export WORK_DS=REPLACEME-work-ds.xml
+export IM_DS=REPLACEME-im-ds.xml
 
 #---------------------------------------------------------------------------------
 # Java, Ant and JBoss home directories...

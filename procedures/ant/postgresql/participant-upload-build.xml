@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="i2b2 project install" basedir=".">
+
+	<property environment="env" />
+
+	<!-- =================================================================== -->
+	<!-- 								INIT 								 -->
+	<!-- =================================================================== -->
+	<target name="init"  description="Prepare for build">
+		<path id="classpath">
+			<pathelement location="${install.home}/lib/postgresql-9.2-1002.jdbc4.jar"/>
+		</path>
+	</target>
+
+	<!-- =================================================================== -->
+	<!--            LOAD PARTICIPANT DATA INTO CRC CELL                      -->
+	<!-- =================================================================== -->
+	<target name="load_participant_data" depends="init">
+		<echo message="Loading participant data -- may take some time." />
+		<sql driver="${db.driver}" 
+			 url="${db.base.url}/${{db.project.data.databasename}}?searchpath=${db.project.data.schemaname}" 
+			 userid="${db.project.data.username}" 
+			 password="${db.project.data.password}" 
+			 classpathref="classpath" 
+			 print="true">    		
+			<!--+
+			    | PDO data inserts...
+			    +-->
+			<fileset dir="${pdo.dir}/${db.type}/crccell">
+				<include name="*.sql"/>
+			</fileset>
+		</sql>
+	</target>
+	
+</project>

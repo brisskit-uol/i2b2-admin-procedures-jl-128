@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Catissue/Metadata data" basedir=".">
+
+    <property environment="env" />
+
+    <!-- =================================================================== -->
+    <!--                   INIT                                              -->
+    <!-- =================================================================== -->
+    <target name="init"  description="Prepare for build">
+            <path id="classpath">
+                  <pathelement location="${install.home}/lib/postgresql-9.2-1002.jdbc4.jar"/>
+            </path>
+    </target>
+
+
+	<!-- =================================================================== -->
+    <!--                    CLEAR FACTS                                      -->
+    <!-- =================================================================== -->
+    <target name="clear_facts" depends="init">
+            <sql driver="${db.driver}" 
+			     url="${db.base.url}/${{db.project.data.databasename}}?searchpath=${db.project.data.schemaname}" 
+			     userid="${db.project.data.username}" 
+			     password="${db.project.data.password}" 
+			     classpathref="classpath" 
+			     print="true">              
+delete FROM Observation_Fact where Concept_Cd like 'CAT%';
+delete FROM concept_dimension where concept_cd like 'CAT%';
+            </sql>
+    </target>
+
+	
+    <!-- =================================================================== -->
+    <!--                    CLEAR METADATA                                   -->
+    <!-- =================================================================== -->
+    <target name="clear_metadata" depends="init">
+            <sql driver="${db.driver}" 
+                 url="${db.base.url}/${{db.project.meta.databasename}}?searchpath=${db.project.meta.schemaname}" 
+                 userid="${db.project.meta.username}" 
+                 password="${db.project.meta.password}"  
+                 classpathref="classpath" 
+                 onerror="continue" 
+                 print="true">
+delete FROM CATISSUE;
+            </sql>
+    </target>
+
+	
+</project>
+
+

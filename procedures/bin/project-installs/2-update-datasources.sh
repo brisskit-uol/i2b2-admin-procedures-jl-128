@@ -1,6 +1,6 @@
 #!/bin/bash
 #-----------------------------------------------------------------------------------------------
-# Inserts the project's data sources for crc, ont and work cells.
+# Inserts the project's data sources for crc, ont, work and im cells.
 #
 # Mandatory: the I2B2_ADMIN_PROCS_HOME environment variable to be set.
 # Optional : the I2B2_ADMIN_PROCS_WORKSPACE environment variable.
@@ -17,7 +17,7 @@
 #
 # Further tailoring can be achieved via the defaults.sh script.
 #
-# Author: Jeff Lusted (jl99@leicester.ac.uk)
+# Author: Jeff Lusted (jeff.lusted@gmail.com)
 #-----------------------------------------------------------------------------------------------
 source $I2B2_ADMIN_PROCS_HOME/bin/common/setenv.sh
 source $I2B2_ADMIN_PROCS_HOME/bin/common/functions.sh
@@ -78,8 +78,8 @@ echo ""
 #
 # Verify JBOSS is not running.
 print_message "Attempting to stop JBoss, if it is running." $LOG_FILE
-$JBOSS_HOME/bin/shutdown.sh -S >>$LOG_FILE 2>>$LOG_FILE
-sleep 35
+$JBOSS_HOME/bin/jboss-cli.sh --connect :shutdown >>$LOG_FILE 2>>$LOG_FILE
+sleep 50
 
 # Deploy ont data source...
 merge_config_properties \
@@ -100,16 +100,23 @@ merge_config_properties \
              $I2B2_ADMIN_PROCS_HOME/config/config.properties \
              $I2B2_ADMIN_PROCS_HOME/config/$DB_TYPE/crc-ds.xml \
              $JBOSS_HOME/server/default/deploy/$CRC_DS
-exit_if_bad $? "Failed to deploy ds at $JBOSS_HOME/server/default/deploy/$CRC_DS" $LOG_FILE  
+exit_if_bad $? "Failed to deploy ds at $JBOSS_HOME/server/default/deploy/$CRC_DS" $LOG_FILE
+
+# Deploy im data source...
+merge_config_properties \
+             $I2B2_ADMIN_PROCS_HOME/config/config.properties \
+             $I2B2_ADMIN_PROCS_HOME/config/$DB_TYPE/im-ds.xml \
+             $JBOSS_HOME/server/default/deploy/$IM_DS
+exit_if_bad $? "Failed to deploy ds at $JBOSS_HOME/server/default/deploy/$IM_DS" $LOG_FILE
 
 #====================================
 # START JBOSS (as a background task)
 #====================================
 print_message "" $LOG_FILE
 print_message "Starting JBoss in the background." $LOG_FILE
-$JBOSS_HOME/bin/run.sh -b 0.0.0.0 >>$LOG_FILE 2>>$LOG_FILE &
+$JBOSS_HOME/bin/standalone.sh -b 0.0.0.0 >>$LOG_FILE 2>>$LOG_FILE &
+sleep 50
 
-sleep 35
 #=========================================================================
 # If we got this far, we may have been be successful...
 #=========================================================================

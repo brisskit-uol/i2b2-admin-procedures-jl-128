@@ -13,7 +13,7 @@ LOG_FILE=$WORK_DIR/$JOB_LOG_NAME
 #====================================
 print_message "" $LOG_FILE
 print_message "Starting JBoss in the background..." $LOG_FILE
-$JBOSS_HOME/bin/shutdown.sh -S >>$LOG_FILE 2>>$LOG_FILE &
+$JBOSS_HOME/bin/jboss-cli.sh --connect :shutdown >>$LOG_FILE 2>>$LOG_FILE
 
 sleep 20
 echo ""
