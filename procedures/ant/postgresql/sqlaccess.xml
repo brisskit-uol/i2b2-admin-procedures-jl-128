@@ -9,8 +9,7 @@
 	<!-- =================================================================== -->
 	<target name="init"  description="Prepare for accessing sql">
 		<path id="classpath">
-			<pathelement location="${proc.home}/lib/ojdbc-14.jar" />
-			<pathelement location="${proc.home}/lib/sqljdbc-2005.jar"/>
+			<pathelement location="${install.home}/lib/postgresql-9.2-1002.jdbc4.jar"/>
 		</path>
 	</target>
 
@@ -19,17 +18,13 @@
 	<!-- =================================================================== -->
 	<target name="crc-1" depends="init">
 		<echo message="accessing crc-1" />
-		<echo>db.driver=${db.driver}</echo>
-		<echo>db.url=${db.url}</echo>
-		<echo>db.i2b2demo.data.databasename=${db.i2b2demo.data.databasename}</echo>
-		<echo>db.i2b2demo.data.username=${db.i2b2demo.data.username}</echo>
 		<sql driver="${db.driver}" 
-				 url="${db.url};port=${sqlserver.port};instanceName=${sqlserver.instanceName};DatabaseName=${db.i2b2demo.data.databasename}" 
-				 userid="${db.i2b2demo.data.username}" 
-				 password="${db.i2b2demo.data.password}" 
-				 classpathref="classpath" 
-				 onerror="continue" 
-				 print="true">
+			 url="${db.base.url}/${db.i2b2demo.data.databasename}?searchpath=${db.i2b2demo.data.schemaname}" 
+			 userid="${db.i2b2demo.data.username}" 
+			 password="${db.i2b2demo.data.password}" 
+			 classpathref="classpath"
+			 onerror="continue" 
+			 print="true">
 		</sql>
 	</target>
 
@@ -39,11 +34,11 @@
 	<target name="ont-1" depends="init">
 		<echo message="accessing ont-1" />
 		<sql driver="${db.driver}" 
-			 url="${db.url};port=${sqlserver.port};instanceName=${sqlserver.instanceName};DatabaseName=${db.i2b2demo.meta.databasename}" 
+			 url="${db.base.url}/${db.i2b2demo.meta.databasename}?searchpath=${db.i2b2demo.meta.schemaname}" 
 			 userid="${db.i2b2demo.meta.username}" 
 			 password="${db.i2b2demo.meta.password}" 
-			 classpathref="classpath" 
-			 onerror="continue" 
+			 classpathref="classpath"
+			 onerror="continue"
 			 print="true">
 		</sql>
 	</target>
@@ -54,57 +49,27 @@
 	<target name="work-1" depends="init">
 		<echo message="accessing work-1" />
 		<sql driver="${db.driver}" 
-			 url="${db.url};port=${sqlserver.port};instanceName=${sqlserver.instanceName};DatabaseName=${db.i2b2demo.work.databasename}" 
+			 url="${db.base.url}/${db.i2b2demo.work.databasename}?searchpath=${db.i2b2demo.work.schemaname}" 
 			 userid="${db.i2b2demo.work.username}" 
 			 password="${db.i2b2demo.work.password}" 
 			 classpathref="classpath" 
-			 onerror="continue" 
+			 onerror="continue"
 			 print="true">
 		</sql>
 	</target>
-
+	
 	<!-- =================================================================== -->
-	<!--            accessing demo2 crc                                      -->
+	<!--            accessing demo im                                      -->
 	<!-- =================================================================== -->
-	<target name="crc-2" depends="init">
-		<echo message="accessing crc-2" />
+	<target name="im-1" depends="init">
+		<echo message="accessing im-1" />
 		<sql driver="${db.driver}" 
-					 url="${db.url};port=${sqlserver.port};instanceName=${sqlserver.instanceName};DatabaseName=${db.i2b2demo.work.password}" 
-					 userid="${db.i2b2demo2.data.username}" 
-					 password="${db.i2b2demo2.data.password}" 
-					 classpathref="classpath" 
-					 onerror="continue" 
-					 print="true">
-		</sql>
-	</target>
-
-	<!-- =================================================================== -->
-	<!--            accessing demo2 ont                                      -->
-	<!-- =================================================================== -->
-	<target name="ont-2" depends="init">
-		<echo message="accessing ont-2" />
-		<sql driver="${db.driver}" 
-				 url="${db.url};port=${sqlserver.port};instanceName=${sqlserver.instanceName};DatabaseName=${db.i2b2demo2.meta.databasename}" 
-				 userid="${db.i2b2demo2.meta.username}" 
-				 password="${db.i2b2demo2.meta.password}" 
-				 classpathref="classpath" 
-				 onerror="continue" 
-				 print="true">
-		</sql>
-	</target>
-
-	<!-- =================================================================== -->
-	<!--            accessing demo2 work                                     -->
-	<!-- =================================================================== -->
-	<target name="work-2" depends="init">
-		<echo message="accessing work-2" />
-		<sql driver="${db.driver}" 
-				 url="${db.url};port=${sqlserver.port};instanceName=${sqlserver.instanceName};DatabaseName=${db.i2b2demo2.work.databasename}" 
-				 userid="${db.i2b2demo2.work.username}" 
-				 password="${db.i2b2demo2.work.password}" 
-				 classpathref="classpath" 
-				 onerror="continue" 
-				 print="true">
+			 url="${db.base.url}/${db.i2b2demo.im.databasename}?searchpath=${db.i2b2demo.im.schemaname}" 
+			 userid="${db.i2b2demo.im.username}" 
+			 password="${db.i2b2demo.im.password}" 
+			 classpathref="classpath" 
+			 onerror="continue"
+			 print="true">
 		</sql>
 	</target>
 	
@@ -114,12 +79,12 @@
 	<target name="hive" depends="init">
 		<echo message="accessing hive" />
 		<sql driver="${db.driver}" 
-					 url="${db.url};port=${sqlserver.port};instanceName=${sqlserver.instanceName};DatabaseName=${db.i2b2hive.databasename}" 
-					 userid="${db.i2b2hive.username}" 
-					 password="${db.i2b2hive.password}" 
-					 classpathref="classpath" 
-					 onerror="continue" 
-					 print="true">
+			 url="${db.base.url}/${db.i2b2hive.databasename}?searchpath=${db.i2b2hive.schemaname}" 
+			 userid="${db.i2b2hive.username}" 
+			 password="${db.i2b2hive.password}" 
+			 classpathref="classpath" 
+			 onerror="continue"
+			 print="true">
 		</sql>
 	</target>
 
@@ -129,56 +94,71 @@
 	<target name="pm" depends="init">
 		<echo message="accessing pm" />
 		<sql driver="${db.driver}" 
-				 url="${db.url};port=${sqlserver.port};instanceName=${sqlserver.instanceName};DatabaseName=${db.i2b2pm.databasename}" 
-				 userid="${db.i2b2pm.username}" 
-				 password="${db.i2b2pm.password}" 
-				 classpathref="classpath" 
-				 onerror="continue" 
-				 print="true"> 
+			 url="${db.base.url}/${db.i2b2pm.databasename}?searchpath=${db.i2b2pm.schemaname}" 
+			 userid="${db.i2b2pm.username}" 
+			 password="${db.i2b2pm.password}" 
+			 classpathref="classpath" 
+			 onerror="continue"
+			 print="true">
 		</sql>
 	</target>
 	
 	<!-- =================================================================== -->
-	<!--            accessing brisskit data artifacts                          -->
+	<!--            accessing brisskit project data artifacts                -->
 	<!-- =================================================================== -->
-	<target name="crc_briccs" depends="init">
-		<echo message="accessing briccs data artifacts" />
+	<target name="crc_brisskit" depends="init">
+		<echo message="accessing brisskit data artifacts" />
 		<sql driver="${db.driver}" 
-				 url="${db.url};port=${sqlserver.port};instanceName=${sqlserver.instanceName};DatabaseName=${db.project.data.databasename}" 
-				 userid="${db.project.data.username}" 
-				 password="${db.project.data.password}" 
-				 classpathref="classpath" 
-				 onerror="continue" 
-				 print="true">
-		</sql>
+			 url="${db.base.url}/${db.project.data.databasename}?searchpath=${db.project.data.schemaname}" 
+			 userid="${db.project.data.username}" 
+			 password="${db.project.data.password}" 
+			 classpathref="classpath" 
+			 onerror="continue"
+			 print="true">
+		</sql>		
 	</target>
 
 	<!-- =================================================================== -->
-	<!--            accessing brisskit metadata artifacts                      -->
+	<!--            accessing brisskit project metadata artifacts            -->
 	<!-- =================================================================== -->
-	<target name="ont_briccs" depends="init">
-		<echo message="accessing briccs metadata artifacts" />
+	<target name="ont_brisskit" depends="init">
+		<echo message="accessing brisskit metadata artifacts" />
 		<sql driver="${db.driver}" 
-			 url="${db.url};port=${sqlserver.port};instanceName=${sqlserver.instanceName};DatabaseName=${db.project.meta.databasename}" 
+			 url="${db.base.url}/${db.project.meta.databasename}?searchpath=${db.project.meta.schemaname}" 
 			 userid="${db.project.meta.username}" 
 			 password="${db.project.meta.password}" 
 			 classpathref="classpath" 
-			 onerror="continue" 
+			 onerror="continue"
 			 print="true">
-		</sql>
+		</sql>		
 	</target>
 
 	<!-- =================================================================== -->
-	<!--            accessing brisskit workdata artifacts                      -->
+	<!--            accessing brisskit project workdata artifacts            -->
 	<!-- =================================================================== -->
-	<target name="work_briccs" depends="init">
-		<echo message="accessing briccs workdata artifacts" />
+	<target name="work_brisskit" depends="init">
+		<echo message="accessing brisskit workdata artifacts" />
 		<sql driver="${db.driver}" 
-			 url="${db.url};port=${sqlserver.port};instanceName=${sqlserver.instanceName};DatabaseName=${db.project.work.databasename}" 
+			 url="${db.base.url}/${db.project.work.databasename}?searchpath=${db.project.work.schemaname}" 
 			 userid="${db.project.work.username}" 
 			 password="${db.project.work.password}" 
 			 classpathref="classpath" 
-			 onerror="continue" 
+			 onerror="continue"
+			 print="true">
+		</sql>
+	</target>
+	
+	<!-- =================================================================== -->
+	<!--            accessing brisskit project im artifacts                  -->
+	<!-- =================================================================== -->
+	<target name="im_brisskit" depends="init">
+		<echo message="accessing brisskit identity management artifacts" />
+		<sql driver="${db.driver}" 
+			 url="${db.base.url}/${db.project.im.databasename}?searchpath=${db.project.im.schemaname}" 
+			 userid="${db.project.im.username}" 
+			 password="${db.project.im.password}" 
+			 classpathref="classpath" 
+			 onerror="continue"
 			 print="true">
 		</sql>
 	</target>
