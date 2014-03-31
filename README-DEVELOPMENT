@@ -9,7 +9,7 @@ The build is production by default.
 Look at the enironment.type property setting within the pom, 
 which is used to produce two artifacts (development and production versions).
 
-The development version can drop databases!!!
+The development version can drop tables!!!
 
 To install or deploy, please use the mvn-*.sh scripts:
 
