@@ -24,5 +24,5 @@ To install or deploy, please use the mvn-*.sh scripts:
 NB: deployment to a snapshot repo or a release repo is governed by the version number.
 If it has SNAPSHOT within the version number, it will deploy only to the snapshot repo.
 
-You need authorisation for (c) and (d); ie: an OS account on the machine
-hosting the Brisskit maven repo plus (for convenience) a public/private key setup. 
+You need authorisation for (c) and (d); 
+ie: requisite admin credentials within your Maven settings.xml file 
